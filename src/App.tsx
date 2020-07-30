@@ -1,24 +1,67 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import {
+  CcButton,
+  CcIcon,
+  CcSwitcher,
+  CcTextarea,
+} from "@cafeta/components-react";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
+    <div className="max-w-screen-md mx-auto">
+      <nav className="bg-secondary lg:bg-primary  p-lg flex">
         <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
+          href="/"
+          className="bg-neutral-04 block px-md py-xsm rounded-full mr-lg"
         >
-          Learn React
+          Link 1
         </a>
-      </header>
+        <a
+          href="/"
+          className="bg-neutral-04 block px-md py-xsm rounded-full mr-lg"
+        >
+          Link 1
+        </a>
+        <a
+          href="/"
+          className="bg-neutral-04 block px-md py-xsm rounded-full mr-lg"
+        >
+          Link 1
+        </a>
+      </nav>
+
+      <article className="p-xxlg">
+        <h1 className="text-heading-01 font-black mb-lg text-neutral-03">
+          Titulo
+        </h1>
+        <p className="mb-lg">
+          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat
+          reiciendis aspernatur hic! Corrupti ratione ut facilis ducimus, aut ea
+          tenetur aspernatur minus. Mollitia, porro accusamus blanditiis veniam
+          voluptatibus qui exercitationem?
+        </p>
+      </article>
+
+      <div className="mb-lg flex items-center justify-center">
+        <CcButton size="sm" iconName="heart" className="mr-lg">
+          Like
+        </CcButton>
+
+        <a
+          href="/"
+          className="bg-secondary hover:bg-secondary-dark text-neutral-04 rounded-full inline-flex items-center justify-center px-md py-xsm font-bold"
+        >
+          Compartir <CcIcon name="facebook" />
+        </a>
+      </div>
+
+      <div className="mb-xlg">
+        <CcSwitcher />
+      </div>
+
+      <div>
+        <CcTextarea rich />
+      </div>
     </div>
   );
 }
