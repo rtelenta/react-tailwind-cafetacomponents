@@ -1,12 +1,38 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useForm } from "react-hook-form";
 import {
   CcButton,
   CcIcon,
+  CcInput,
   CcSwitcher,
   CcTextarea,
 } from "@cafeta/components-react";
 
 function App() {
+  const { register, handleSubmit, setValue, errors } = useForm({
+    mode: 'onTouched'
+  });
+
+  const onSubmit = (data : any) => {
+    console.log(data)
+  };
+
+  useEffect(() => {
+    register('description', { required: 'Este campo es obligatorio', maxLength: {value: 150, message: 'No mas de 150'} });
+  }, [register]);
+
+  const onUpdateInput = (key: string) => {
+    return (e: any) => {
+      setValue(key, e.target.value);
+    }
+  }
+
+  const onUpdateTextarea = (key: string) => {
+    return (e: any) => {
+      setValue(key, e.detail);
+    }
+  }
+  console.log(errors)
   return (
     <div className="max-w-screen-md mx-auto">
       <nav className="bg-secondary lg:bg-primary  p-lg flex">
@@ -30,17 +56,31 @@ function App() {
         </a>
       </nav>
 
+
+
+
       <article className="p-xxlg">
-        <h1 className="text-heading-01 font-black mb-lg text-neutral-03">
-          Titulo
-        </h1>
-        <p className="mb-lg">
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Repellat
-          reiciendis aspernatur hic! Corrupti ratione ut facilis ducimus, aut ea
-          tenetur aspernatur minus. Mollitia, porro accusamus blanditiis veniam
-          voluptatibus qui exercitationem?
-        </p>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <CcInput 
+            name='title'
+            helperText={errors?.title?.message}
+            inputRef={register({ required: 'Este campo es obligatorio', minLength: {value: 10, message: 'No mas de 10'} })}
+            error={'title' in errors}
+            onInput={onUpdateInput('title')} 
+            label='Titulo'/>
+          <CcTextarea 
+            name='description'
+            autoGrow={true}
+            helperText={errors?.description?.message}
+            error={'description' in errors}
+            onChangeText={onUpdateTextarea('description')} 
+            label='Descripcion'/>
+          <CcButton type="submit" className='mt-xxlg'>Guardar</CcButton>
+        </form>
       </article>
+
+
+
 
       <div className="mb-lg flex items-center justify-center">
         <CcButton size="sm" iconName="heart" className="mr-lg">
